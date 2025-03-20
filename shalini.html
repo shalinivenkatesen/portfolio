@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Analyst Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #1e3a8a; /* Dark Blue */
+            --primary-light: #3b82f6; /* Bright Blue */
+            --background: #0f172a; /* Deep Dark Blue */
+            --light: #f1f5f9;
+            --text-light: #e2e8f0;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        nav {
+            background-color: var(--primary);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 1rem;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            padding: 0.5rem 1.5rem;
+            margin: 0 0.5rem;
+            border-radius: 0.25rem;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover,
+        nav a.active {
+            background-color: var(--primary-light);
+            color: white;
+        }
+
+        section {
+            min-height: 100vh;
+            padding: 6rem 2rem 2rem;
+            display: none;
+        }
+
+        section.active {
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Home Section */
+        #home {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .profile-container {
+            background: var(--primary);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            margin-top: -4rem;
+        }
+
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin-bottom: 1.5rem;
+            object-fit: cover;
+            border: 4px solid var(--primary-light);
+        }
+
+        .download-btn {
+            display: inline-block;
+            background-color: var(--primary-light);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            margin-top: 1.5rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background-color: var(--light);
+            color: var(--primary);
+        }
+
+        /* About Section */
+        .about-content {
+            background: var(--primary);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-category {
+            background: var(--primary);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        .skill-bar {
+            width: 100%;
+            height: 0.5rem;
+            background: #334155;
+            border-radius: 0.25rem;
+            margin: 0.5rem 0 1rem;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: var(--primary-light);
+            border-radius: 0.25rem;
+            transition: width 0.3s ease;
+        }
+
+        /* Contact Section */
+        .contact-form {
+            background: var(--primary);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #64748b;
+            border-radius: 0.5rem;
+            margin-top: 0.25rem;
+            background-color: var(--background);
+            color: var(--text-light);
+        }
+
+        button {
+            background-color: var(--primary-light);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: var(--light);
+            color: var(--primary);
+        }
+
+        h1, h2, h3 {
+            color: var(--light);
+        }
+
+        p {
+            color: var(--text-light);
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav a {
+                display: block;
+                margin: 0.5rem 0;
+            }
+
+            section {
+                padding-top: 8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#home" class="active" onclick="showSection('home', this)">Home</a></li>
+            <li><a href="#about" onclick="showSection('about', this)">About</a></li>
+            <li><a href="#skills" onclick="showSection('skills', this)">Skills</a></li>
+            <li><a href="#contact" onclick="showSection('contact', this)">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="home" class="active">
+        <div class="container">
+            <div class="profile-container">
+                <img src="shalini2.jpg" alt="Shalini" class="profile-image">
+                <h1>Shalini Venkatesan</h1>
+                <h2>Frontend Developer</h2>
+                <p>
+                    "Seeking an opportunity to apply my skills in data manipulation,
+                    SQL, Python, and visualization tools like Power BI to contribute to business growth and innovation. 
+                    Committed to continuous learning and staying updated with emerging trends in data analytics"
+                </p>
+                <a href="#" class="download-btn" onclick="alert('Resume download started!')">Download Resume</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <p>
+                    Shalini Venkatesan is a passionate and aspiring data analyst with a strong foundation
+                     in both commerce and technology. She completed her schooling at Bharatidasan Higher
+                      Secondary School (10th) and Sri Lakshmi Higher Secondary School (12th) before earning
+                       her B.Com degree from Thirumurugan College of Arts and Science.
+                </p>
+                <p>
+                    Her interest in data analytics has driven her to develop expertise in
+                     Python, SQL, Power BI, and Excel, enabling her to analyze and interpret
+                      complex datasets efficiently. Additionally, she has honed her skills in
+                       HTML, CSS, and JavaScript, giving her a broader understanding of data
+                        visualization and web-based analytical tools.
+                </p>
+                <p>
+                    With a keen eye for detail and a problem-solving mindset, Shalini is eager
+                     to leverage her analytical skills to drive data-driven decisions and optimize
+                      business performance. She is constantly exploring new technologies and methodologies
+                       to stay ahead in the evolving world of data analytics.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <h2>Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Languages</h3>
+                    <div class="skill-item">
+                        <p>Python</p>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 65%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <p>SQL</p>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 70%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Tools</h3>
+                    <div class="skill-item">
+                        <p>Power BI</p>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 70%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <p>Excel</p>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 65%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Web Development</h3>
+                    <div class="skill-item">
+                        <p>HTML</p>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 75%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <p>CSS</p>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 70%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <p>JavaScript</p>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 65%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2>Contact Me</h2>
+            <form class="contact-form" onsubmit="event.preventDefault(); alert('Message sent successfully!');">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="company">Company</label>
+                    <input type="text" id="company">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" rows="4" required></textarea>
+                </div>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        function showSection(sectionId, clickedLink) {
+            // Hide all sections
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update active link
+            document.querySelectorAll('nav a').forEach(link => {
+                link.classList.remove('active');
+            });
+            clickedLink.classList.add('active');
+        }
+    </script>
+</body>
+</html>
